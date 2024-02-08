@@ -6,6 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 if TYPE_CHECKING:
     from ..training.models import Training
 
+
 class User(Base):
     __tablename__ = "users"
 
