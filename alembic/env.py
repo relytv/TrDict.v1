@@ -10,6 +10,7 @@ from alembic import context
 from trainingnote.database import Base, DATABASE_URL
 from trainingnote.user.models import User
 from trainingnote.training.models import Training
+from trainingnote.exercise.models import Exercise
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
