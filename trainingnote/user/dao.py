@@ -1,4 +1,4 @@
-from base.base import Base
+from trainingnote.base.base import Base
 from trainingnote.user.models import User
 
 
