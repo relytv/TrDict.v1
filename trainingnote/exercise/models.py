@@ -18,4 +18,4 @@ class Exercise(Base):
     title: Mapped[String] = mapped_column(String(20))
     repetitions: Mapped[int | None]
     weight: Mapped[int | None]
-    training: Mapped["Training"] = relationship(back_populates="exercises")
+    training: Mapped["Training"] = relationship(back_populates="exercise")

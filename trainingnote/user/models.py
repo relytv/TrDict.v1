@@ -3,8 +3,7 @@ from typing import TYPE_CHECKING
 from trainingnote.database import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-if TYPE_CHECKING:
-    from ..training.models import Training
+from trainingnote.training.models import Training
 
 
 class User(Base):

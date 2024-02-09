@@ -5,9 +5,9 @@ from sqlalchemy import ForeignKey
 from datetime import date
 
 if TYPE_CHECKING:
-    from ..user.models import User
-    from ..exercise.models import Exercise
+    from trainingnote.user.models import User
 
+from ..exercise.models import Exercise
 
 class Training(Base):
     __tablename__ = "trainings"
@@ -16,5 +16,5 @@ class Training(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     description: Mapped[str]
     date: Mapped[date | None]
-    user: Mapped["User"] = relationship(back_populates="trainings")
-    exercise: Mapped["Exercise"] = relationship(back_populates="trainings")
+    user: Mapped["User"] = relationship(back_populates="training")
+    exercise: Mapped[list["Exercise"]] = relationship(back_populates="training")
