@@ -1,11 +1,15 @@
-from datetime import datetime
+from typing import TYPE_CHECKING
+from datetime import date, datetime
 from pydantic import BaseModel
+
+if TYPE_CHECKING:
+    from trainingnote.user.schemas import UserDTO
 
 
 class AddTrainingDTO(BaseModel):
-    user_id: int
     description: str
-    date: datetime
+    date: datetime | None = None
+    user_id: int
 
 
 class TrainingDTO(AddTrainingDTO):
@@ -13,5 +17,4 @@ class TrainingDTO(AddTrainingDTO):
 
 
 class RelTrainingDTO(AddTrainingDTO):
-    pass
-
+    users: "UserDTO"

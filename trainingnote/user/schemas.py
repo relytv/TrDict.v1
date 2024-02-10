@@ -10,12 +10,12 @@ class SUser(BaseModel):
 
 class AddUserDTO(BaseModel):
     email: EmailStr
-    password: str
+    hashed_password: str
 
 
 class UserDTO(AddUserDTO):
     id: int
 
 
-class RelUserDTO(UserDTO):
-    trainings: list["TrainingDTO"]
+class UserRelDTO(UserDTO):
+    training: list["TrainingDTO"]

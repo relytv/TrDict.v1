@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Response, status
+from fastapi import APIRouter, HTTPException, Response, status, Depends
 
 from trainingnote.user.auth import (
     authenticate_user,
@@ -7,6 +7,7 @@ from trainingnote.user.auth import (
 )
 from .dao import UserDAO
 from trainingnote.user.schemas import SUser
+from trainingnote.user.dependencies import get_current_user
 
 router = APIRouter(prefix="/user", tags=["Auth&User"])
 
@@ -34,3 +35,8 @@ async def login(response: Response, user_date: SUser):
 @router.post("/logout")
 async def logout(response: Response):
     response.delete_cookie("access_token")
+
+
+@router.get("/get_trainings")
+async def get_trainings(user = Depends(get_current_user)):
+    return await UserDAO.get_all_trainings(user.id)
