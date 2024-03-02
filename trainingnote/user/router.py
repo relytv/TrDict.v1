@@ -5,6 +5,7 @@ from trainingnote.user.auth import (
     create_access_token,
     get_password_hash,
 )
+from trainingnote.user.models import User
 from .dao import UserDAO
 from trainingnote.user.schemas import SUser
 from trainingnote.user.dependencies import get_current_user
@@ -37,6 +38,19 @@ async def logout(response: Response):
     response.delete_cookie("access_token")
 
 
+@router.patch("/update_password")
+async def update(new_password: str, user: User = Depends(get_current_user)):
+    hashed_password = get_password_hash(new_password)
+    await UserDAO.update(user.id, hashed_password=hashed_password)
+    return {"message": "Password updated successfully"}
+
+
+@router.delete("/delete")
+async def delete(user: User = Depends(get_current_user)):
+    await UserDAO.delete(user.id)
+    return {"message": "Good Bye, see you next time, DUDE"}
+
+
 @router.get("/get_trainings")
-async def get_trainings(user = Depends(get_current_user)):
+async def get_trainings(user=Depends(get_current_user)):
     return await UserDAO.get_all_trainings(user.id)
