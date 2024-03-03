@@ -7,8 +7,10 @@ from trainingnote.user.auth import (
 )
 from trainingnote.user.models import User
 from .dao import UserDAO
-from trainingnote.user.schemas import SUser
+from trainingnote.user.schemas import SUser, UserDTO, UserRelDTO
 from trainingnote.user.dependencies import get_current_user
+from fastapi_cache.decorator import cache
+
 
 router = APIRouter(prefix="/user", tags=["Auth&User"])
 
@@ -51,6 +53,7 @@ async def delete(user: User = Depends(get_current_user)):
     return {"message": "Good Bye, see you next time, DUDE"}
 
 
-@router.get("/get_trainings")
+@router.get("/get_all")
+@cache(expire=30)
 async def get_trainings(user=Depends(get_current_user)):
     return await UserDAO.get_all_trainings(user.id)

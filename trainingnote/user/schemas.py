@@ -10,7 +10,7 @@ class SUser(BaseModel):
 
 class AddUserDTO(BaseModel):
     email: EmailStr
-    hashed_password: str
+    #hashed_password: str
 
 
 class UserDTO(AddUserDTO):
